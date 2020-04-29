@@ -12,6 +12,10 @@
             .square.start {
                 background-color: green;
                 z-index: 2;
+                transition: 0.2s;
+            }
+            .square.start:hover {
+                background-color: chartreuse;
             }
             .square.end {
                 background-color: red;
@@ -61,20 +65,20 @@
         <?php
             //100 randomly placed squares
             for($i = 0; $i < 100; $i++) {
-                $x = rand(0,96);
-                $y = rand(0,96);
-                echo '<div class="square" onmouseover="lose();" style="left:'.$x.'%; top:'.$y.'%;"></div>';
+                $x = rand(0,100);
+                $y = rand(0,100);
+                echo '<div class="square" onmouseover="lose();" style="left:calc('.$x.'% - 20px); top:calc('.$y.'% - 20px);"></div>';
             }
 
             //random start position
-            $x = rand(0,96);
-            $y = rand(0,96);
-            echo '<div class="square start" onmouseover="start();" style="left:'.$x.'%; top:'.$y.'%;"></div>';
+            $x = rand(0,100);
+            $y = rand(0,100);
+            echo '<div class="square start" onmouseover="start();" style="left:calc('.$x.'% - 20px); top:calc('.$y.'% - 20px);"></div>';
 
             //random end position
-            $x = rand(0,96);
-            $y = rand(0,96);
-            echo '<div class="square end" onmouseover="win();" style="left:'.$x.'%; top:'.$y.'%;"></div>';
+            $x = rand(0,100);
+            $y = rand(0,100);
+            echo '<div class="square end" onmouseover="win();" style="left:calc('.$x.'% - 20px); top:calc('.$y.'% - 20px);"></div>';
         ?>
     </body>
 </html>
