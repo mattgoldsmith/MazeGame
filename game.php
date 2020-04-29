@@ -67,13 +67,13 @@
             }
 
             //random start position
-            $x = rand(0,100);
-            $y = rand(0,100);
+            $x = rand(0,96);
+            $y = rand(0,96);
             echo '<div class="square start" onmouseover="start();" style="left:'.$x.'%; top:'.$y.'%;"></div>';
 
             //random end position
-            $x = rand(0,100);
-            $y = rand(0,100);
+            $x = rand(0,96);
+            $y = rand(0,96);
             echo '<div class="square end" onmouseover="win();" style="left:'.$x.'%; top:'.$y.'%;"></div>';
         ?>
     </body>
