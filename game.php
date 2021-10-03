@@ -53,30 +53,62 @@
 
             function myMove() {
                 var elem = document.getElementById("end"); 
-                //TODO: get element start position and move in random directions  
+ 
                 var posX = 0;
                 var posY = 0;
 
                 const width = window.innerWidth;
                 const height = window.innerHeight;
 
+                let coords = getRandomPosition(width, height);
+
+                let x = coords['x'];
+                let y = coords['y'];
+
+                let further = (Math.abs(x - posX) > Math.abs(y - posY) ? 'x' : 'y');
+
+                if(further == 'x') {
+                    var ratio = x/y;
+                }
+                else {
+                    var ratio = y/x;
+                }
+
+                var interval = 10
+                var id = setInterval(frame, interval);
+                function frame() {
+                    if (posX != x && posY != y) {
+                        if(further == 'x') {
+                            (posX > x ? posX -= ratio : posX += ratio);
+                            (posY > y ? posY -- : posY ++);
+                        }
+                        else {
+                            (posY > y ? posY -= ratio : posY += ratio);
+                            (posX > x ? posX -- : posX ++);
+                        }
+                        elem.style.left = posX + "px"; 
+                        elem.style.top = posY + "px"; 
+                    }
+                    else {
+                        // TODO: move this to when the player wins
+                        // clearInterval(id);
+                        // if(interval > 2) {
+                        //     interval --;
+                        // }
+                        // id = setInterval(frame, interval);
+                        coords = getRandomPosition(width, height);
+
+                        x = coords['x'];
+                        y = coords['y'];
+                    }
+                }
+            }
+
+            function getRandomPosition(width, height) {
                 let x = Math.floor(Math.random() * width) - 20;
                 let y = Math.floor(Math.random() * height) - 20;
 
-                var id = setInterval(frame, 5);
-                function frame() {
-                    if (posX != x) {
-                        posX++; 
-                        elem.style.left = posX + "px"; 
-                    } 
-                    else if(posY != y) {
-                        posY++; 
-                        elem.style.top = pos + "px"; 
-                    }
-                    else {
-                        clearInterval(id);
-                    }
-                }
+                return JSON.parse('{"x" : '+x+', "y" : '+y+'}');
             }
         </script>
     </head>
