@@ -35,7 +35,7 @@
 
             function win(){
                 if(started){
-                    start = false;
+                    started = false;
                     alert("you win!");
                     location.reload();
                 }
@@ -50,6 +50,34 @@
                    location.reload();
                 }
             }
+
+            function myMove() {
+                var elem = document.getElementById("end"); 
+                //TODO: get element start position and move in random directions  
+                var posX = 0;
+                var posY = 0;
+
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+
+                let x = Math.floor(Math.random() * width) - 20;
+                let y = Math.floor(Math.random() * height) - 20;
+
+                var id = setInterval(frame, 5);
+                function frame() {
+                    if (posX != x) {
+                        posX++; 
+                        elem.style.left = posX + "px"; 
+                    } 
+                    else if(posY != y) {
+                        posY++; 
+                        elem.style.top = pos + "px"; 
+                    }
+                    else {
+                        clearInterval(id);
+                    }
+                }
+            }
         </script>
     </head>
     <body 
@@ -58,7 +86,10 @@
             session_start();
             if (empty($_SESSION['new'])){
                 $_SESSION['new'] = 1;
-                echo 'onload="startgame();"';
+                echo 'onload="startgame();myMove();"';
+            }
+            else{
+                echo 'onload="myMove();"';
             }
         ?>  
     >
@@ -78,7 +109,9 @@
             //random end position
             $x = rand(2,100);
             $y = rand(2,100);
-            echo '<div class="square end" onmouseover="win();" style="left:calc('.$x.'% - 20px); top:calc('.$y.'% - 20px);"></div>';
+            // echo '<div id="end" class="square end" onmouseover="win();" style="left:calc('.$x.'% - 20px); top:calc('.$y.'% - 20px);"></div>';
+            echo '<div id="end" class="square end" onmouseover="win();" style="left:0; top:0;"></div>';
+
         ?>
     </body>
 </html>
